@@ -1,0 +1,13 @@
+{
+	"MongoConfig": [
+		{
+			"hostName": "CoreStudio",
+			"server": "localhost",
+			"port": 27017,
+			"username": "",
+			"password": "",
+			"database": "CoreStudio",
+			"isDefault": true
+		}
+	]
+}

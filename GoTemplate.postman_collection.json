@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "GoTemplate",
+		"_postman_id": "ef3b003c-93f2-40dd-44d1-df36505e24de",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/r/readData",
+			"request": {
+				"url": "http://localhost:3000/r/readData",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJ1c2VySWQiOiJzb21uYXRoZ0Bta2NsLm9yZyJ9.5oQD1dgoD2BqySwfbuwHuKn6R9Pl8_KMCXslce5eaJU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"somnathg\",\n\t\"password\" : \"SS!OO***&&\",\n\t\"createdBy\" : \"mkcls@mkcl.org\",\n\t\"modifiedBy\" : \"somnathg@mkcl.org\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/r/insertData",
+			"request": {
+				"url": "http://localhost:3000/r/c/deleteData",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJ1c2VySWQiOiJzb21uYXRoZ0Bta2NsLm9yZyJ9.5oQD1dgoD2BqySwfbuwHuKn6R9Pl8_KMCXslce5eaJU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"somnathg\",\n\t\"password\" : \"SS!OO***&&\",\n\t\"createdBy\" : \"mkcls@mkcl.org\",\n\t\"modifiedBy\" : \"somnathg@mkcl.org\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "deleteData",
+			"request": {
+				"url": "http://localhost:3000/r/updateData",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJ1c2VySWQiOiJzb21uYXRoZ0Bta2NsLm9yZyJ9.5oQD1dgoD2BqySwfbuwHuKn6R9Pl8_KMCXslce5eaJU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"somnathg\",\n\t\"password\" : \"SS!OO***&&\",\n\t\"createdBy\" : \"mkcls@mkcl.org\",\n\t\"modifiedBy\" : \"somnathg@mkcl.org\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateData",
+			"request": {
+				"url": "http://localhost:3000/r/updateData",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJ1c2VySWQiOiJzb21uYXRoZ0Bta2NsLm9yZyJ9.5oQD1dgoD2BqySwfbuwHuKn6R9Pl8_KMCXslce5eaJU",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"somnathg\",\n\t\"password\" : \"SS!OO***&&\",\n\t\"createdBy\" : \"mkcls@mkcl.org\",\n\t\"modifiedBy\" : \"somnathg@mkcl.org\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
