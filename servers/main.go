@@ -48,7 +48,7 @@ func main() {
 	}
 	g := gin.New()
 	gin.DefaultErrorWriter = logFile
-	gin.DefaultWriter = "logs.log"
+	gin.DefaultWriter = logFile
 	g.Use(gin.LoggerWithWriter(logFile))
 	g.Use(middleware.Recovery())
 	md := cors.DefaultConfig()
@@ -58,7 +58,6 @@ func main() {
 	md.ExposeHeaders = []string{"Authorization"}
 	g.Use(cors.New(md))
 
-	// g.Use(cors.Default())
 	middleware.Init(g)
 
 	if err := initializeAll(g); err != nil {
@@ -99,17 +98,31 @@ func initializeAll(g *gin.Engine) error {
 		return err
 	}
 	ConfigData := gjson.ParseBytes(content)
-	err = common.InitDBConnectionUsingJson(ConfigData.Get("MongoConfig").String())
+	err = common.InitMongoDBConnectionUsingJson(ConfigData.Get("MongoConfig").String())
 	if err != nil {
 		loggermdl.LogError(err)
 		return err
 	}
+
+	// Decode Provided jwt token
+	// err = models.DecodeToken("Token")
+	// if err != nil {
+	// 	return err
+	// }
+
+	// Initialise Mysql Connection
+	// cnn, err := common.InitMysqlDBConnectionUsingJson(ConfigData.Get("MysqlConfig").String())
+	// if err != nil {
+	// 	loggermdl.LogError(err)
+	// 	return err
+	// }
+
 	// Pprof
-	pport, err := common.StartPprof(models.PprofPort)
-	if err != nil {
-		loggermdl.LogError(err)
-		return err
-	}
-	loggermdl.LogError("pprof server is running on port", pport)
+	// pport, err := common.StartPprof(models.PprofPort)
+	// if err != nil {
+	// 	loggermdl.LogError(err)
+	// 	return err
+	// }
+	// loggermdl.LogError("pprof server is running on port", pport)
 	return nil
 }

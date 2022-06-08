@@ -2,7 +2,7 @@ package routes
 
 import (
 	"golangtemplate/servers/app/models"
-	"golangtemplate/servers/app/modules/databasemdl"
+	"golangtemplate/servers/app/modules/localmongo"
 	"net/http"
 
 	"github.com/gin-gonic/contrib/jwt"
@@ -18,11 +18,15 @@ func Init(g *gin.Engine) {
 	r := g.Group("/r")
 	r.Use(jwt.Auth(models.JWTKey))
 	c := r.Group("/c")
+	// use in case of mongo DB
+	r.POST("/readData", localmongo.ReadData)
+	r.POST("/insertData", localmongo.InsertData)
+	r.POST("/updateData", localmongo.UpdateData)
+	c.POST("/deleteData", localmongo.DeleteData)
 
-	r.POST("/readData", databasemdl.ReadData)
-	r.POST("/insertData", databasemdl.InsertData)
-	r.POST("/updateData", databasemdl.UpdateData)
-	c.POST("/deleteData", databasemdl.DeleteData)
+	// use in case of mysql DB
+	r.POST("/readMysqlData", localmongo.ReadData)
+
 	g.GET("/checkServerStatus", func(c *gin.Context) {
 		c.String(http.StatusOK, "Server is running - OK")
 	})

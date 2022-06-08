@@ -2,9 +2,9 @@ package models
 
 import (
 	"encoding/json"
+	"fmt"
 	"time"
 
-	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/authmdl/jwtmdl"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/dalmdl/coremongo"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/errormdl"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/loggermdl"
@@ -15,7 +15,7 @@ import (
 var (
 	// JWTKey - JWTKey for r and c
 	JWTKey     = "gUkXp2s5v8y/B?E(H+MbQeThVmYq3t6w"
-	ConfigPath = "../mongodb.json"
+	ConfigPath = "../database.json"
 	Host       = "CoreStudio"
 	Database   = "CoreStudio"
 	Collection = "gotemplate"
@@ -109,11 +109,17 @@ func GetResponseData(result interface{}, errorData interface{}, errorCode int) R
 	}
 }
 
-func DecodeToken(tokenReq string) (p jwt.MapClaims, err error) {
-	principle, err := jwtmdl.GeneratePricipleObjUsingToken(tokenReq, JWTKey)
+func DecodeToken(tokenString string) error {
+	claims := jwt.MapClaims{}
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(JWTKey), nil
+	})
 	if err != nil {
-		return nil, err
+		return err
 	}
-	loggermdl.LogError("jwt", principle)
-	return principle, err
+	loggermdl.LogError("token,", token)
+	for key, val := range claims {
+		fmt.Printf("Key: %v, value: %v\n", key, val)
+	}
+	return err
 }

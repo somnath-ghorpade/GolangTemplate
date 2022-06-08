@@ -7,11 +7,13 @@ import (
 	_ "net/http/pprof"
 
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/dalmdl/coremongo"
+	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/dalmdl/mysql"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/errormdl"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/loggermdl"
+	"github.com/gocraft/dbr/v2"
 )
 
-func InitDBConnectionUsingJson(jsonString string) error {
+func InitMongoDBConnectionUsingJson(jsonString string) error {
 	var hosts []coremongo.MongoHost
 	json.Unmarshal([]byte(jsonString), &hosts)
 
@@ -20,7 +22,24 @@ func InitDBConnectionUsingJson(jsonString string) error {
 		loggermdl.LogError(err)
 		return errormdl.Wrap(err.Error())
 	}
-	return nil
+	return err
+}
+
+func InitMysqlDBConnectionUsingJson(jsonString string) (mysqlConn *dbr.Connection, err error) {
+	var hosts mysql.MySQLConnection
+	json.Unmarshal([]byte(jsonString), &hosts)
+	mysqlConnection, err := mysql.InitConnection(hosts)
+	if err != nil {
+		loggermdl.LogError(err)
+		return nil, errormdl.Wrap(err.Error())
+	}
+	res, err := mysqlConnection.Query("Select * from Users;")
+	if err != nil {
+		loggermdl.LogError(err)
+		return nil, errormdl.Wrap(err.Error())
+	}
+	loggermdl.LogError("res", res)
+	return mysqlConnection, err
 }
 
 // GeneratePort - generate new availabe port

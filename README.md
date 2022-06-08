@@ -1,8 +1,8 @@
 ## Steps to run Go Template project on local
 
- - Server is a golang gin framework developed at Go v1.17.9
+ - Server is a golang gin framework developed at Go v1.15.15+
  - Before running update following files according to environment:
-	 - Update db related config in - `mongodb.json`
+	 - Update db related config in - `database.json`
 	 - Server requires mongodb database (version 4.4.13)
  - To run:
 	 - `go mod tidy`
@@ -22,3 +22,5 @@
 ## JWT Usage
  - To use jwt authentication and its variables uncomment decodeToken method to access all token variables.
 
+## MySQL Connection 
+ - To get Mysql DB connection using provided json file just uncomment the  `InitMysqlDBConnectionUsingJson` method from main file.

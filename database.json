@@ -1,0 +1,24 @@
+{
+	"MongoConfig": [
+		{
+			"hostName": "CoreStudio",
+			"server": "localhost",
+			"port": 27017,
+			"username": "",
+			"password": "",
+			"database": "CoreStudio",
+			"isDefault": true
+		}
+	],
+	"MysqlConfig":[
+		{
+			"hostName": "CoreStudio",
+			"server": "localhost",
+			"port": 3306,
+			"username": "root",
+			"password": "Gh0rpade",
+			"database": "CoreStudio",
+			"isDefault": true
+		}
+	]
+}
