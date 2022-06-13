@@ -1,15 +1,11 @@
 package models
 
 import (
-	"encoding/json"
 	"fmt"
 	"time"
 
-	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/dalmdl/coremongo"
-	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/errormdl"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/loggermdl"
 	"github.com/dgrijalva/jwt-go"
-	"gopkg.in/mgo.v2/bson"
 )
 
 var (
@@ -43,49 +39,6 @@ type ResponseData struct {
 	ErrorCode      int         `json:"errorCode"`
 	IsCompressed   bool        `json:"isCompressed"`
 	ServerTime     time.Time   `json:"serverTime"`
-}
-
-func (r *User) Save() (string, error) {
-	dao := coremongo.GetMongoDAO(Collection)
-	InsId, err := dao.SaveData(r)
-	if err != nil {
-		return "error insert", errormdl.Wrap(err.Error())
-	}
-	return InsId, errormdl.Wrap(err.Error())
-}
-
-func (r *User) Get() error {
-	dao := coremongo.GetMongoDAO(Collection)
-	res, err := dao.GetData(bson.M{})
-	if err != nil {
-		return err
-	}
-	umErr := json.Unmarshal([]byte(res.Get("0").String()), r)
-	return errormdl.Wrap(umErr.Error())
-}
-
-func (r *User) Update(i interface{}) error {
-	if len(r.UserName) == 0 {
-		return errormdl.Wrap("Cannot update non-existent document")
-	}
-	dao := coremongo.GetMongoDAO(Collection)
-	err := dao.Update(bson.M{"UserName": r.UserName}, i)
-	if err != nil {
-		return errormdl.Wrap(err.Error())
-	}
-	return err
-}
-
-func DeleteRecord(UserName string) error {
-	if len(UserName) == 0 {
-		return errormdl.Wrap("Cannot delete non-existent document")
-	}
-	dao := coremongo.GetMongoDAO(Collection)
-	err := dao.DeleteData(bson.M{"UserName": UserName})
-	if err != nil {
-		return errormdl.Wrap(err.Error())
-	}
-	return errormdl.Wrap(err.Error())
 }
 
 func NewInstance(userName, password, createdBy, modifiedBy string, createdOn, modifiedOn int64) User {

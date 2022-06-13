@@ -111,12 +111,14 @@ func initializeAll(g *gin.Engine) error {
 	// }
 
 	// Initialise Mysql Connection
-	// cnn, err := common.InitMysqlDBConnectionUsingJson(ConfigData.Get("MysqlConfig").String())
-	// if err != nil {
-	// 	loggermdl.LogError(err)
-	// 	return err
-	// }
-
+	cnn, err := common.InitMysqlDBConnectionUsingJson(ConfigData.Get("MysqlConfig").String())
+	if err != nil {
+		loggermdl.LogError(err)
+		return err
+	}
+	// mysq
+	// session := cnn.NewSession()
+	loggermdl.LogError("session", cnn)
 	// Pprof
 	// pport, err := common.StartPprof(models.PprofPort)
 	// if err != nil {

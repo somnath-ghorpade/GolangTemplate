@@ -10,7 +10,7 @@ import (
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/dalmdl/mysql"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/errormdl"
 	"corelab.mkcl.org/MKCLOS/coredevelopmentplatform/corepkgv2/loggermdl"
-	"github.com/gocraft/dbr/v2"
+	"github.com/tidwall/gjson"
 )
 
 func InitMongoDBConnectionUsingJson(jsonString string) error {
@@ -25,21 +25,27 @@ func InitMongoDBConnectionUsingJson(jsonString string) error {
 	return err
 }
 
-func InitMysqlDBConnectionUsingJson(jsonString string) (mysqlConn *dbr.Connection, err error) {
-	var hosts mysql.MySQLConnection
+func InitMysqlDBConnectionUsingJson(jsonString string) (gres *gjson.Result, err error) {
+	var hosts []mysql.MySQLConnection
 	json.Unmarshal([]byte(jsonString), &hosts)
-	mysqlConnection, err := mysql.InitConnection(hosts)
+
+	loggermdl.LogError("in mysql", hosts)
+	err = mysql.InitUsingJSON(hosts)
+	// mysqlConnection, err := mysql.InitConnection(hosts)
 	if err != nil {
 		loggermdl.LogError(err)
-		return nil, errormdl.Wrap(err.Error())
+		return gres, errormdl.Wrap(err.Error())
 	}
-	res, err := mysqlConnection.Query("Select * from Users;")
+	mysql.GetMYSQLConnection("MySQLHost")
+	mysqlDAO := mysql.GetMySQLDAO()
+	result, err := mysqlDAO.SelectQuery("Select * from Users;")
+	// res, err := mysqlConnection.Query("Select * from Users;")
 	if err != nil {
 		loggermdl.LogError(err)
-		return nil, errormdl.Wrap(err.Error())
+		return gres, errormdl.Wrap(err.Error())
 	}
-	loggermdl.LogError("res", res)
-	return mysqlConnection, err
+	loggermdl.LogError("res", result)
+	return result, err
 }
 
 // GeneratePort - generate new availabe port

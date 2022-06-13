@@ -12,13 +12,12 @@
 	],
 	"MysqlConfig":[
 		{
-			"hostName": "CoreStudio",
-			"server": "localhost",
+			"hostName": "MySQLHost",
+			"server": "10.2.10.28",
 			"port": 3306,
-			"username": "root",
-			"password": "Gh0rpade",
-			"database": "CoreStudio",
-			"isDefault": true
+			"username": "test",
+			"password": "test",
+			"database": "Profile"
 		}
 	]
 }
